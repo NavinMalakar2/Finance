@@ -50,7 +50,7 @@ export default function LoginForm() {
   setMessage("");
 
   try {
-    const res = await axios.post("https://finance-j3r3.onrender.com", formData, {
+    const res = await axios.post("https://finance-c45v.onrender.com/api/auth/login", formData, {
       withCredentials: true,
     });
 

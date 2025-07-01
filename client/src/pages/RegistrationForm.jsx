@@ -25,7 +25,7 @@ export default function RegistrationForm() {
     setMessage("");
 
     try {
-      const res = await axios.post("https://finance-j3r3.onrender.com", formData, { withCredentials: true });
+      const res = await axios.post("https://finance-c45v.onrender.com/api/auth/register", formData, { withCredentials: true });
       setMessage(res.data.message);
       navigate("/login")
       

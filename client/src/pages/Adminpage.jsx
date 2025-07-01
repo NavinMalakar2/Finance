@@ -452,8 +452,8 @@ export default function AdminDashboard() {
   const fetchAll = async () => {
     try {
       const [empRes, adminRes] = await Promise.all([
-        axios.get("http://localhost:8001/api/auth/employees"),
-        axios.get("http://localhost:8001/api/auth/admins"),
+        axios.get("https://finance-c45v.onrender.com/api/auth/employees"),
+        axios.get("https://finance-c45v.onrender.com/api/auth/admins"),
       ]);
       setEmployees(empRes.data.employees);
       setAdmins(adminRes.data.admins);
@@ -469,7 +469,7 @@ export default function AdminDashboard() {
   const handleAddEmp = async () => {
     if (!newEmp.name || !newEmp.email || !newEmp.empId || !newEmp.phone) return;
     try {
-      await axios.post("http://localhost:8001/api/auth/create-employee", {
+      await axios.post("https://finance-c45v.onrender.com/api/auth/create-employee", {
         ...newEmp,
         role: "employee",
         password: "emp123"
@@ -485,7 +485,7 @@ export default function AdminDashboard() {
   const handleAddAdmin = async () => {
     if (!newAdmin.name || !newAdmin.email || !newAdmin.adminId) return;
     try {
-      await axios.post("http://localhost:8001/api/auth/addadmin", {
+      await axios.post("https://finance-c45v.onrender.com/api/auth/addadmin", {
         ...newAdmin,
         role: "admin",
         password: "admin123"
@@ -500,7 +500,7 @@ export default function AdminDashboard() {
 
   const handleDeleteEmp = async (id) => {
     try {
-      await axios.delete(`http://localhost:8001/api/auth/employee/${id}`);
+      await axios.delete(`https://finance-c45v.onrender.com/api/auth/employee/:id`);
       setMessage("✅ Employee removed");
       fetchAll();
     } catch {
@@ -510,7 +510,7 @@ export default function AdminDashboard() {
 
   const handleDeleteAdmin = async (id) => {
     try {
-      await axios.delete(`http://localhost:8001/api/auth/admin/${id}`);
+      await axios.delete(`https://finance-c45v.onrender.com/api/auth/admin/${id}`);
       setMessage("✅ Admin removed");
       fetchAll();
     } catch {
