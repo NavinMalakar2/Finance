@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.use(
   cors({
-    origin: "https://finance-1-ept2.onrender.com/", // exact origin of your frontend
+    origin: "https://finance-1-ept2.onrender.com", // exact origin of your frontend
     credentials: true,               // allow cookies/auth headers
   })
 );
