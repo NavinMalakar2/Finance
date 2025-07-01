@@ -50,7 +50,7 @@ export default function LoginForm() {
   setMessage("");
 
   try {
-    const res = await axios.post("http://localhost:8001/api/auth/login", formData, {
+    const res = await axios.post("https://finance-j3r3.onrender.com", formData, {
       withCredentials: true,
     });
 
