@@ -5,64 +5,15 @@ import transporter from '../config/nodemailer.js';
 
 
 
-// export const register = async (req, res) => {
-//     const { name, email, password } = req.body;
-
-//     if (!name || !email || !password) {
-//         return res.status(400).json({ msg: "All fields are required" });
-//     }
-
-//     try {
-//         const existingUser = await userModel.findOne({ email });
-//         if (existingUser) {
-//             return res.status(400).json({ msg: "User already exists, please login" });
-//         }
-
-//         const hashedPassword = await bcrypt.hash(password, 10);
-
-//         const user = new userModel({ name, email, password: hashedPassword });
-//         await user.save();
-
-//         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-//         res.cookie("token", token, {
-//             httpOnly: true,
-//             secure: process.env.NODE_ENV === "production",
-//             sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-//             maxAge: 7 * 24 * 60 * 60 * 1000,
-//         });
-
-//         // Sending welcome email
-//         const mailOptions = {
-//             from: process.env.SENDER_EMAIL,
-//             to: email,
-//             subject: "Welcome to our website",
-//             text: `Welcome to the website, ${name}! Your account has been created successfully. Enjoy your stay.`,
-//         };
-
-//         // Debugging email options
-//         console.log("Mail Options:", mailOptions);
-
-//         await transporter.sendMail(mailOptions);
-
-//         return res.status(201).json({ success: true, message: "User registered successfully" });
-//     } catch (error) {
-//         console.error("Error during registration:", error.message);
-//         return res.status(500).json({ success: false, msg: error.message });
-//     }
-// };
-
-
-// LOGIN FUNCTION
-
 export const register = async (req, res) => {
   const { name, email, password, role, employeeID, companyName } = req.body;
 
-  // ✅ Step 1: Basic validation (for ALL roles)
+  //  Basic validation (for ALL roles)
   if (!name || !email || !password || !role) {
     return res.status(400).json({ msg: "Name, email, password and role are required" });
   }
 
-  // ✅ Step 2: Role-specific validation
+  //Role-specific validation
   if (role === "employee" && !employeeID) {
     return res.status(400).json({ msg: "Employee ID is required for employee registration" });
   }
@@ -71,19 +22,19 @@ export const register = async (req, res) => {
     return res.status(400).json({ msg: "Company Name is required for businessman registration" });
   }
 
-  // ✅ No extra validation needed for customer
+  
 
   try {
-    // ✅ Step 3: Check uniqueness based on email + role
+    // Check uniqueness based on email + role
     const existingUser = await userModel.findOne({ email, role });
     if (existingUser) {
       return res.status(400).json({ msg: `User already exists as ${role}, please login` });
     }
 
-    // ✅ Step 4: Hash password
+    //  Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // ✅ Step 5: Create new user with optional role-based fields
+    //  Create new user with optional role-based fields
     const user = new userModel({
       name,
       email,
@@ -95,12 +46,12 @@ export const register = async (req, res) => {
 
     await user.save();
 
-    // ✅ Step 6: JWT token
+    //JWT token
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
-    // ✅ Step 7: Set token cookie
+    // Set token cookie
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -108,7 +59,7 @@ export const register = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    // ✅ Step 8: Welcome email
+    // Welcome email
     const mailOptions = {
       from: process.env.SENDER_EMAIL,
       to: email,

@@ -18,33 +18,6 @@ export default function LoginForm() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setMessage("");
-
-  //   try {
-  //     const res = await axios.post("http://localhost:8001/api/auth/login", formData, {
-  //       withCredentials: true,
-  //     });
-
-  //     setMessage(res.data.message || "Login successful");
-
-  //     // Optional: redirect based on role
-  //     // if (res.data.user.role === "admin") navigate("/admin");
-  //     const role = res.data.user.role;
-  //      if (role === "customer") {
-  //       navigate("/");
-  //     } else if (role === "employee") {
-  //       navigate("/employeedashboard");
-  //     } else if (role === "businessman") {
-  //       navigate("/business-dashboard");
-  //     }
-      
-  //   } catch (err) {
-  //     setMessage(err.response?.data?.msg || "Login failed");
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
   e.preventDefault();
   setMessage("");

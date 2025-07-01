@@ -1,4 +1,4 @@
-// src/components/InsuranceCategories.jsx
+
 export default function InsuranceCategories() {
   const mainCategories = [
     { title: "Term Life Insurance", img: "https://img.icons8.com/color/96/security-checked.png", badge: "Lowest Price Guarantee" },

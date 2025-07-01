@@ -1,7 +1,4 @@
-// controllers/adminController.js
-// import User from "../models/User.js";
 
-// controllers/adminController.js
 import User from "../models/adminModel.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";

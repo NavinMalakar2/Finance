@@ -1,4 +1,4 @@
-// src/components/CustomerFeedback.jsx
+
 
 export default function CustomerFeedback() {
   const feedbacks = [

@@ -4,7 +4,7 @@ import userAuth from '../middleware/userAuth.js';
 
 export const authRouter = express.Router();
 
-// Importing User model
+
 
 authRouter.post('/register',register);
 authRouter.post('/login',login);
